@@ -1,8 +1,8 @@
 const express = require('express');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const passport = require('passport');
+// const passport = require('passport');
 const cors = require('cors');
 
 const app = express();
@@ -26,15 +26,17 @@ const options = {
 app.use(cors(options));
 
 // Middlewares/Services
-app.use(passport.initialize());
-require('./services/passport')(passport);
+// app.use(passport.initialize());
+// require('./services/passport')(passport);
 
 // API Routes
 require('./routes')(app);
 
 
 // Connect to MongoDB
-
+mongoose.connect("mongodb+srv://admin:admin@cluster0-sniyh.mongodb.net/test?retryWrites=true")
+  .then(() => console.log('Connected to Mongo'))
+  .catch(err => console.log('Mongo Error! ', err));
 
 
 module.exports = app;
