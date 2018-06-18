@@ -1,3 +1,14 @@
 <mat-toolbar color="primary">
-  Frenzie App
+  <span>
+    <a routerLink="/">Frenzie App</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/create" routerLinkActive="activeLink">New Post</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/login" routerLinkActive="activeLink">Login</a>
+    </li>
+  </ul>
 </mat-toolbar>

@@ -6,17 +6,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { SharedModule } from "./shared/shared.module";
+import { AppRoutingModule } from "./app-routing.module";
+import { SignupComponent } from "./auth/signup/signup.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
