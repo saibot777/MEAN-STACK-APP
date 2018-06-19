@@ -1,26 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from "./header/header.component";
-import { LoginComponent } from "./auth/login/login.component";
 import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
-import { SignupComponent } from "./auth/signup/signup.component";
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { StoreRouterConnectingModule} from "@ngrx/router-store";
+import { reducers, metaReducers } from './store';
+import { EffectsModule } from "@ngrx/effects";
+import { AuthModule } from "./auth/auth.module";
+import { HomeComponent } from "./home/home.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    LoginComponent,
-    SignupComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthModule.forRoot(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({stateKey: 'router'})
   ],
   providers: [],
   bootstrap: [AppComponent]
