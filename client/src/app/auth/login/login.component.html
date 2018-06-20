@@ -9,6 +9,6 @@
         <input autocomplete="off" name="password" ngModel matInput type="password" placeholder="Password" #passwordInput="ngModel" required>
         <mat-error *ngIf="passwordInput.invalid">Please enter a valid password</mat-error>
       </mat-form-field>
-    <button class="btn-sub" mat-raised-button color="accent">Login</button>
+    <button class="btn-sub" type="submit" mat-raised-button color="accent">Login</button>
   </form>
 </mat-card>

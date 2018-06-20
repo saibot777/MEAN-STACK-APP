@@ -10,15 +10,13 @@ export class AuthEffects {
   @Effect({dispatch: false})
   login$ = this.actions$.pipe(
     ofType<Login>(AuthActionTypes.LoginAction),
-    tap(action => localStorage.setItem("user", JSON.stringify(action.payload.user))),
-    tap(() => this.router.navigateByUrl('/'))
+    tap(action => localStorage.setItem("frenzytoken", action.payload.user.token))
   );
 
   @Effect({dispatch: false})
-  register$ = this.actions$.pipe(
+  signup$ = this.actions$.pipe(
     ofType<Register>(AuthActionTypes.RegisterAction),
-    tap(action => localStorage.setItem("user", JSON.stringify(action.payload.user))),
-    tap(() => this.router.navigateByUrl('/'))
+    tap(() => this.router.navigateByUrl('/login'))
   );
 
   @Effect({dispatch: false})
@@ -26,11 +24,26 @@ export class AuthEffects {
     ofType<Logout>(AuthActionTypes.LogoutAction),
     tap(() => {
 
-      localStorage.removeItem("user");
+      localStorage.removeItem("frenzytoken");
       this.router.navigateByUrl('/login');
 
     })
   );
+
+  // @Effect({ dispatch: false })
+  // LogInSuccess: Observable<any> = this.actions$.pipe(
+  //   ofType(AuthActionTypes.LoginSuccess),
+  //   tap((user) => {
+  //     localStorage.setItem('frenzytoken', user.payload.token);
+  //     this.router.navigateByUrl('/');
+  //   })
+  // );
+  //
+  // @Effect({ dispatch: false })
+  // RegisterSuccess: Observable<any> = this.actions$.pipe(
+  //   ofType(AuthActionTypes.RegisterSuccess),
+  //   tap(() => this.router.navigateByUrl('/login'))
+  // );
 
   constructor(private actions$: Actions, private router: Router) {}
 
